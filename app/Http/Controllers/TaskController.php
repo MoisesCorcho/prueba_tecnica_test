@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveTaskRequest;
+use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return Task::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $tasks = Task::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->paginate(10);
+
+        return TaskResource::collection($tasks);
     }
 
     /**
@@ -54,9 +57,13 @@ class TaskController extends Controller
             ], 404);
         }
 
-        return response()->json([
-            'task' => $task
-        ]);
+        if (auth()->user()->cannot('view', $task)) {
+            return response()->json([
+                'message' => 'No tienes permiso para actualizar esta tarea'
+            ], 403);
+        }
+
+        return TaskResource::make($task);
     }
 
     /**
@@ -99,7 +106,7 @@ class TaskController extends Controller
             ], 404);
         }
 
-        if (auth()->user()->cannot('update', $task)) {
+        if (auth()->user()->cannot('delete', $task)) {
             return response()->json([
                 'message' => 'No tienes permiso para actualizar esta tarea'
             ], 403);
