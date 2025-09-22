@@ -35,12 +35,12 @@ class TaskController extends Controller
 
         if (! $task) {
             return response()->json([
-                'message' => 'Error al crear la tarea'
+                'message' => 'Error creating the task'
             ], 500);
         }
 
         return response()->json([
-            'message' => 'Tarea creada correctamente',
+            'message' => 'Task successfully created',
             'task' => $task
         ]);
     }
@@ -54,13 +54,13 @@ class TaskController extends Controller
 
         if (! $task) {
             return response()->json([
-                'message' => 'Tarea no encontrada'
+                'message' => 'Task not found'
             ], 404);
         }
 
         if (auth()->user()->cannot('view', $task)) {
             return response()->json([
-                'message' => 'No tienes permiso para actualizar esta tarea'
+                'message' => 'You do not have permission to view this task'
             ], 403);
         }
 
@@ -76,20 +76,20 @@ class TaskController extends Controller
 
         if (! $task) {
             return response()->json([
-                'message' => 'Tarea no encontrada'
+                'message' => 'Task not found'
             ], 404);
         }
 
         if ($request->user()->cannot('update', $task)) {
             return response()->json([
-                'message' => 'No tienes permiso para actualizar esta tarea'
+                'message' => 'You do not have permission to update this task'
             ], 403);
         }
 
         $task->update($request->all());
 
         return response()->json([
-            'message' => 'Tarea actualizada correctamente',
+            'message' => 'Task successfully updated',
             'task' => $task
         ]);
     }
@@ -103,13 +103,13 @@ class TaskController extends Controller
 
         if (! $task) {
             return response()->json([
-                'message' => 'Tarea no encontrada'
+                'message' => 'Task not found'
             ], 404);
         }
 
         if (auth()->user()->cannot('delete', $task)) {
             return response()->json([
-                'message' => 'No tienes permiso para actualizar esta tarea'
+                'message' => 'You do not have permission to delete this task'
             ], 403);
         }
 
