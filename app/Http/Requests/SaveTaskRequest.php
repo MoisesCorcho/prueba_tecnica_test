@@ -23,7 +23,7 @@ class SaveTaskRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255'],
             'status' => ['required', 'boolean', 'max:255'],
             'due_date' => ['required', 'date'],
         ];
