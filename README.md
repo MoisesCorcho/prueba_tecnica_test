@@ -24,7 +24,7 @@ Esta es una API RESTful construida con Laravel para gestionar tareas de usuarios
 
 Sigue estos pasos para poner en marcha el proyecto en tu entorno local.
 
-0. **Clona el repositorio:** se puede acceder a la API a traves de la URL https://pruebatecnica.moisescorchodev.com/api/v1
+0. Se puede acceder a la API a traves de la URL https://pruebatecnica.moisescorchodev.com/api/v1
 
 1. **Clona el repositorio:**
 
